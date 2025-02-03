@@ -1,15 +1,22 @@
 # pipg - Wrapper para Pip
 
-`pipg` é um wrapper para `pip` que facilita a instalação e remoção de pacotes Python, mantendo automaticamente um arquivo `requirements.txt` atualizado.
+`pipg` é um wrapper para `pip` que facilita a instalação e remoção de pacotes Python, mantendo automaticamente arquivos de dependências organizados.
 
 ## 🚀 Funcionalidades
-- Instala pacotes com `pipg install <pacote>`.
+- Instala pacotes com `pipg install <pacote> [--group <prod|dev|test>]`.
 - Remove pacotes com `pipg uninstall <pacote>`.
-- Atualiza automaticamente o `requirements.txt` com a versão correta dos pacotes instalados.
+- Atualiza automaticamente o arquivo de dependências correto (`requirements.txt`, `requirements-dev.txt`, `requirements-test.txt`).
+- Remove pacotes desinstalados de **todos** os arquivos de requirements.
 - Mensagens coloridas para melhor visualização dos status.
 
-## 📦 Instalação
-Para instalar o `pipg` como um pacote local:
+## 📚 Instalação
+Para instalar o `pipg`:
+
+```sh
+pip install pipg
+```
+
+Ou, para instalar localmente:
 
 ```sh
 pip install .
@@ -19,26 +26,27 @@ pip install .
 
 ### ✅ Instalar um pacote
 ```sh
-pipg install fastapi
+pipg install fastapi --group dev
 ```
-Isso instalará o pacote `fastapi` e registrará a versão no `requirements.txt`.
+Isso instalará o pacote `fastapi` e o registrá em `requirements-dev.txt`. Se `--group` não for especificado, ele será registrado em `requirements.txt`.
 
 ### ❌ Desinstalar um pacote
 ```sh
 pipg uninstall fastapi
 ```
-Isso removerá o `fastapi` e o excluirá do `requirements.txt`.
+Isso removerá o `fastapi` do ambiente e também de **todos os arquivos** de requirements (`requirements.txt`, `requirements-dev.txt`, `requirements-test.txt`).
 
-## 🏗 Estrutura do Projeto
+## 🏢 Estrutura do Projeto
 ```
 pipg/
 │── pipg/
 │   │── __init__.py
 │   │── cli.py
+│   │── package_manager.py
+│   │── requirements_manager.py
+│   │── utils.py
 │── setup.py
 │── README.md
-│── LICENSE
-│── setup.cfg
 │── pyproject.toml
 ```
 
@@ -48,7 +56,3 @@ pipg/
 3. Faça commit das suas alterações (`git commit -m 'Adiciona nova feature'`).
 4. Faça push para a branch (`git push origin minha-feature`).
 5. Abra um Pull Request.
-
-## 📜 Licença
-Este projeto está sob a licença MIT. Sinta-se à vontade para utilizá-lo e modificá-lo conforme necessário.
-
