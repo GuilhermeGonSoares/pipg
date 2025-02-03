@@ -2,7 +2,7 @@ from setuptools import find_packages, setup
 
 setup(
     name="pipg",
-    version="0.2.0",
+    version="0.2.1",
     packages=find_packages(),
     install_requires=[],
     entry_points={
@@ -12,7 +12,7 @@ setup(
     },
     author="Guilherme Gonçalves Soares",
     author_email="guilherme16.gon@gmail.com",
-    description="Um wrapper simples para o pip que instala e já escreve o nome e a versão do pacote no requirements.txt",
+    description="Wrapper para pip que automatiza a instalação, remoção e gerenciamento de dependências em arquivos de requirements.",
     long_description=open("README.md").read(),
     long_description_content_type="text/markdown",
     url="https://github.com/GuilhermeGonSoares/pipg",
