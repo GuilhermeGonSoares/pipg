@@ -1,7 +1,7 @@
 import subprocess
 import sys
-from utils import colored_text, is_package_installed, get_installed_version
-from requirements_manager import update_requirements, remove_from_requirements
+from pipg.utils import colored_text, is_package_installed, get_installed_version
+from pipg.requirements_manager import update_requirements, remove_from_requirements
 
 GROUP_REQUIREMENTS = {
     "prod": "requirements.txt",
@@ -47,6 +47,5 @@ def uninstall_package(package_name):
         print(colored_text(f"Erro ao desinstalar {package_name}", "red"))
         return
 
-    # Remover o pacote de TODOS os arquivos de requirements
     for group_file in GROUP_REQUIREMENTS.values():
         remove_from_requirements(package_name, group_file)

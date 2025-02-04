@@ -1,5 +1,5 @@
 import os
-from utils import colored_text
+from pipg.utils import colored_text
 
 
 def update_requirements(package_name, version, requirements_file):
@@ -55,10 +55,12 @@ def remove_from_requirements(package_name, requirements_file):
             for line in lines:
                 if not line.startswith(f"{package_name}=="):
                     f.write(line)
-        print(
-            colored_text(
-                f"PACOTE: {package_name} removido do {requirements_file}", "green"
-            )
-        )
+                else:
+                    print(
+                        colored_text(
+                            f"PACOTE: {package_name} removido do {requirements_file}",
+                            "green",
+                        )
+                    )
     except IOError:
         print(colored_text(f"Erro ao acessar o arquivo {requirements_file}", "red"))

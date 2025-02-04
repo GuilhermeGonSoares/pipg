@@ -1,7 +1,7 @@
 import argparse
 import sys
-from package_manager import install_package, uninstall_package
-from utils import colored_text
+from pipg.package_manager import install_package, uninstall_package
+from pipg.utils import colored_text
 
 
 def main():
@@ -18,7 +18,9 @@ def main():
         help="Define o grupo de instalação (padrão: prod).",
     )
 
-    parser.add_argument("package", help="Nome do pacote a ser instalado/desinstalado")
+    parser.add_argument(
+        "packages", nargs="+", help="Nome do pacote a ser instalado/desinstalado"
+    )
 
     args = parser.parse_args()
 
@@ -33,9 +35,11 @@ def main():
         sys.exit(1)
 
     if args.command == "install":
-        install_package(args.package, args.group)
+        for package in args.packages:
+            install_package(package, args.group)
     elif args.command == "uninstall":
-        uninstall_package(args.package)
+        for package in args.packages:
+            uninstall_package(package)
     else:
         print(
             colored_text(
